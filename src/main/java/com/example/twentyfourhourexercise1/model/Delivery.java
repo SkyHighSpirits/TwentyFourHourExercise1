@@ -26,7 +26,6 @@ public class Delivery {
     @OneToMany(mappedBy = "delivery")
     List<ProductOrder> productOrders;
 
-
     public Delivery()
     {
 
