@@ -16,18 +16,28 @@ public class Delivery {
 
     private String destination;
 
-    @OneToMany(mappedBy = "delivery")
-    List<Order> orders;
-
-    public Delivery(int id, LocalDate deliveryDate, String destination) {
+    public Delivery(int id, LocalDate deliveryDate, String destination, List<ProductOrder> productOrders) {
         this.id = id;
         this.deliveryDate = deliveryDate;
         this.destination = destination;
+        this.productOrders = productOrders;
     }
+
+    @OneToMany(mappedBy = "delivery")
+    List<ProductOrder> productOrders;
+
 
     public Delivery()
     {
 
+    }
+
+    public List<ProductOrder> getOrders() {
+        return productOrders;
+    }
+
+    public void setOrders(List<ProductOrder> productOrders) {
+        this.productOrders = productOrders;
     }
 
     public int getId() {

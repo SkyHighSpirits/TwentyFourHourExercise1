@@ -5,7 +5,17 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-public class Order {
+public class ProductOrder {
+
+    public ProductOrder(int id, int quantity, List<Product> products, Delivery delivery) {
+        this.id = id;
+        this.quantity = quantity;
+        this.products = products;
+        this.delivery = delivery;
+    }
+
+    public ProductOrder()
+    {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,13 +23,20 @@ public class Order {
 
     private int quantity;
 
-    @OneToMany(mappedBy = "order", orphanRemoval = true)
+    @OneToMany(mappedBy = "productOrder", orphanRemoval = true)
     private List<Product> products;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
+    public Delivery getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+    }
 
     public int getId() {
         return id;
